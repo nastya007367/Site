@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Портфоліо — Маловажна Анастасія</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap">
+<style>
+:root{--bg:#f4eee6;--card:#fffaf4;--ink:#392b22;--muted:#867568;--line:#e8dbcd;--violet:#8b654b;--pink:#c49a78;--side:290px;box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px)}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;min-height:100vh}
+.sidebar{position:fixed;inset:0 auto 0 0;width:var(--side);background:linear-gradient(170deg,#6f5140,#98765d 55%,#c5a487);color:#fff;padding:calc(30px + env(safe-area-inset-top,0px)) 20px 28px;display:flex;flex-direction:column;gap:24px;overflow:hidden;z-index:20}
+.sidebar::before{content:"";position:absolute;width:250px;height:250px;right:-110px;top:-90px;border-radius:50%;background:rgba(255,255,255,.12)}
+.me{position:relative;text-align:center}
+.avatar{width:90px;height:90px;border-radius:30px;margin:0 auto 12px;background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.55);display:grid;place-items:center;font-size:34px;font-weight:800}
+.me h1{font-size:21px;font-weight:800;line-height:1.2}
+.me p{font-size:13px;opacity:.9;margin-top:6px}
+.tabs{position:relative;display:flex;flex-direction:column;gap:9px}
+.tab{all:unset;cursor:pointer;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:18px;font-weight:700;font-size:15px;background:rgba(255,255,255,.14);transition:.2s}
+.tab .n{width:30px;height:30px;border-radius:10px;flex:none;display:grid;place-items:center;background:rgba(255,255,255,.25);font-size:14px;font-weight:800}
+.tab.sub{margin-left:24px;padding:9px 13px;font-size:14px}
+.tab.sub .n{width:28px;height:24px;font-size:11px}
+.tab:hover{background:rgba(255,255,255,.26);transform:translateX(4px)}
+.tab.active{background:#fff;color:var(--violet)}
+.tab.active .n{background:linear-gradient(135deg,#76543f,#b58c6b);color:#fff}
+.tab:focus-visible,.goto:focus-visible{outline:3px solid #2563eb;outline-offset:2px}
+.profile-link{position:relative;margin-top:auto;text-align:center;text-decoration:none;color:#fff;font-weight:700;font-size:14px;padding:13px;border-radius:18px;border:2px solid rgba(255,255,255,.6)}
+.profile-link:hover{background:#fff;color:var(--violet)}
+main{margin-left:var(--side);padding:44px 44px 64px;max-width:1200px}
+.panel{display:none;animation:in .35s ease}
+.panel.active{display:block}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.panel-head{border-radius:30px;padding:38px 42px;margin-bottom:34px;color:#fff;position:relative;overflow:hidden}
+.panel-head::after{content:"";position:absolute;right:-60px;top:-70px;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.15)}
+.ph-about{background:linear-gradient(120deg,#76543f,#b58c6b)}
+.ph-htb{background:linear-gradient(120deg,#4c4037,#79624f 55%,#aa896d)}
+.ph-thm{background:linear-gradient(120deg,#5b493c,#92765d 55%,#b99a7c)}
+.ph-cisco{background:linear-gradient(120deg,#8b654b,#c4a181)}
+.tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.2);padding:6px 14px;border-radius:999px;margin-bottom:12px}
+.panel-head h2{font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1.1}
+.panel-head p{margin-top:10px;opacity:.9;max-width:560px}
+.count{display:inline-block;margin-top:16px;background:rgba(255,255,255,.18);padding:8px 16px;border-radius:999px;font-size:14px;font-weight:700}
+.about-card{background:var(--card);border-radius:28px;padding:28px 32px;border:1px solid var(--line);box-shadow:0 14px 36px -22px rgba(27,19,64,.4)}
+.about-card h3{font-size:22px;font-weight:800;margin-bottom:8px}
+dl div{display:grid;grid-template-columns:170px minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+dt{color:var(--muted);font-weight:600}
+dd{font-weight:700;overflow-wrap:anywhere}
+dd a{color:var(--violet);text-decoration:none}
+.stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.stats span{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:700}
+.about-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.goto{all:unset;cursor:pointer;box-sizing:border-box;font:700 14px/1.4 'Manrope',system-ui,sans-serif;padding:10px 20px;border-radius:999px;color:#fff;background:linear-gradient(135deg,#76543f,#b58c6b)}
+.goto:hover{filter:brightness(1.1)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+.card{background:var(--card);border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:0 14px 36px -22px rgba(27,19,64,.4);display:flex;flex-direction:column;transition:transform .25s}
+.card:hover{transform:translateY(-4px)}
+.thumb{aspect-ratio:16/10;display:grid;place-items:center;font-size:44px;background:linear-gradient(135deg,#eee2d4,#dfc8b2)}
+.card .body{padding:16px 18px 18px}
+.card h4{font-size:16px;font-weight:800}
+.meta{color:var(--muted);font-size:13px;margin:4px 0 12px}
+.card .body a{display:inline-block;font-size:14px;font-weight:700;color:#fff;text-decoration:none;padding:8px 16px;border-radius:999px;background:linear-gradient(135deg,#76543f,#b58c6b)}
+.thumb{position:relative;overflow:hidden}
+.shot{position:absolute;inset:0;display:block}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .3s}
+.card:hover .shot img{transform:scale(1.03)}
+.shot.fit img{object-fit:contain;background:#1a1d27}
+.shot:focus-visible{outline:3px solid #2563eb;outline-offset:-3px}
+.pts{display:inline-block;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;margin-left:6px;color:var(--violet)}
+.note{margin:-14px 0 22px;color:var(--muted)}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:24px;padding:26px 28px}
+.empty p{color:var(--muted);margin-bottom:14px}
+.empty a{display:inline-block;font-weight:700;color:#fff;text-decoration:none;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#76543f,#b58c6b)}
+.hub{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+.hub button{all:unset;cursor:pointer;box-sizing:border-box;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px 24px;box-shadow:0 14px 36px -22px rgba(27,19,64,.4);transition:transform .25s;display:flex;flex-direction:column;gap:6px}
+.hub button:hover{transform:translateY(-4px)}
+.hub button:focus-visible{outline:3px solid #2563eb;outline-offset:2px}
+.hub .ico{font-size:38px}
+.hub .num{font-size:34px;font-weight:800;color:var(--violet);line-height:1.1}
+.hub .lbl{font-weight:800;font-size:17px}
+.hub .go{color:var(--muted);font-size:14px;font-weight:700}
+@media (max-width:860px){
+.sidebar{position:static;width:auto;padding-top:calc(22px + env(safe-area-inset-top,0px));gap:16px}
+.tabs{flex-direction:row;flex-wrap:wrap}.tab.sub{margin-left:0}
+.profile-link{margin-top:0}
+main{margin-left:0;padding:24px 18px 48px}
+.panel-head{padding:28px 24px}
+dl div{grid-template-columns:1fr;gap:2px}
+}
+
+.lb{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(15,12,10,.88);cursor:zoom-out}
+.lb.open{display:flex}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.5);background:#fff}
+.lb button{position:absolute;top:14px;right:18px;width:42px;height:42px;border:0;border-radius:50%;font-size:26px;line-height:1;color:#fff;background:rgba(255,255,255,.18);cursor:pointer}
+.lb button:hover{background:rgba(255,255,255,.32)}
+body.lb-lock{overflow:hidden}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="me">
+    <div class="avatar">МА</div>
+    <h1>Маловажна Анастасія</h1>
+    <p>Староста групи ННІ4-24-302 Кб</p>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-target="about"><span class="n">1</span>Інформація про мене</button>
+    <button class="tab" role="tab" data-target="htb"><span class="n">2</span>Hack The Box</button>
+    <button class="tab sub" role="tab" data-target="badges"><span class="n">2.1</span>Бейджі</button>
+    <button class="tab sub" role="tab" data-target="machines"><span class="n">2.2</span>Машини</button>
+    <button class="tab sub" role="tab" data-target="challenges"><span class="n">2.3</span>Челенджі</button>
+    <button class="tab" role="tab" data-target="thm"><span class="n">3</span>TryHackMe</button>
+    <button class="tab" role="tab" data-target="cisco"><span class="n">4</span>Cisco Networking Academy</button>
+  </nav>
+  <a class="profile-link" href="https://www.netacad.com/profile?tab=badges" target="_blank" rel="noopener">🔗 Мій профіль Cisco NetAcad</a>
+</aside>
+
+<main>
+  <section class="panel active" id="about">
+    <div class="panel-head ph-about"><span class="tag">Інформація про мене</span><h2>Маловажна Анастасія</h2><p>Староста групи ННІ 4-24-302 Кб</p></div>
+    <div class="about-card">
+      <h3>Коротко про мене</h3>
+      <dl>
+        <div><dt>Ім’я</dt><dd>Маловажна Анастасія</dd></div>
+        <div><dt>Посада</dt><dd>Староста групи ННІ 4-24-302 Кб</dd></div>
+        <div><dt>Навчання на платформах</dt><dd>Hack The Box Academy, TryHackMe, Cisco Networking Academy</dd></div>
+        <div><dt>Нік на Hack The Box</dt><dd><a href="https://profile.hackthebox.com/profile/01a037f5-5e12-71c7-b814-c91b11fb7662?utm_medium=copy_url" target="_blank" rel="noopener">Профіль Hack The Box</a></dd></div>
+        <div><dt>Нік на TryHackMe</dt><dd><a href="https://tryhackme.com/p/AnastasiyaMalov?utm_campaign=social_share&amp;utm_medium=social&amp;utm_content=profile&amp;cardVersion=27f4c38b17aa&amp;utm_source=copy&amp;share_date=2026-11-12&amp;sharerId=679b309dcf92687cdf8dc420" target="_blank" rel="noopener">AnastasiyaMalov</a></dd></div>
+      </dl>
+      <div class="stats"><span>🎓 15 сертифікатів Cisco</span><span>🏅 6 бейджів</span><span>💻 5 машин HTB</span><span>🚩 7 челенджів HTB</span><span>🚩 2 кімнати THM</span></div>
+      <div class="about-links">
+        <a class="goto" href="https://profile.hackthebox.com/profile/01a037f5-5e12-71c7-b814-c91b11fb7662?utm_medium=copy_url" target="_blank" rel="noopener">Профіль Hack The Box ↗</a>
+        <a class="goto" href="https://tryhackme.com/p/AnastasiyaMalov?utm_campaign=social_share&amp;utm_medium=social&amp;utm_content=profile&amp;cardVersion=27f4c38b17aa&amp;utm_source=copy&amp;share_date=2026-11-12&amp;sharerId=679b309dcf92687cdf8dc420" target="_blank" rel="noopener">Профіль TryHackMe ↗</a>
+        <button class="goto" data-goto="htb">Hack The Box</button>
+        <button class="goto" data-goto="badges">Бейджі</button>
+        <button class="goto" data-goto="machines">Машини HTB</button>
+        <button class="goto" data-goto="challenges">Челенджі HTB</button>
+        <button class="goto" data-goto="thm">Кімнати TryHackMe</button>
+        <button class="goto" data-goto="cisco">Сертифікати Cisco</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="htb">
+    <div class="panel-head ph-htb"><span class="tag">Платформа</span><h2>Hack The Box</h2><p>Мої результати на платформі: машини, челенджі та бейджі.</p></div>
+    <div class="hub">
+      <button data-goto="machines"><span class="ico">💻</span><span class="num">5</span><span class="lbl">Машини</span><span class="go">Відкрити →</span></button>
+      <button data-goto="challenges"><span class="ico">🚩</span><span class="num">7</span><span class="lbl">Челенджі</span><span class="go">Відкрити →</span></button>
+      <button data-goto="badges"><span class="ico">🏅</span><span class="num">6</span><span class="lbl">Бейджі</span><span class="go">Відкрити →</span></button>
+    </div>
+    <div class="about-links" style="margin-top:26px"><a class="goto" href="https://profile.hackthebox.com/profile/01a037f5-5e12-71c7-b814-c91b11fb7662?utm_medium=copy_url" target="_blank" rel="noopener">Профіль Hack The Box ↗</a></div>
+  </section>
+
+  <section class="panel" id="badges">
+    <div class="panel-head ph-htb"><span class="tag">Hack The Box · 2.1</span><h2>Бейджі</h2><p>Отримані нагороди на платформі.</p><div class="count">🏅 6 бейджів</div></div>
+    <div class="grid">
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://profile.hackthebox.com/profile/01a037f5-5e12-71c7-b814-c91b11fb7662?utm_medium=copy_url" target="_blank" rel="noopener" aria-label="Start building your arsenal"><img src="https://static.hackthebox.com/academy/badges/start-building-your-arsenal.png" alt="Бейдж Start building your arsenal" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>🏅</div><div class="body"><h4>Start building your arsenal</h4><p class="meta">Бейдж Hack The Box</p><a href="https://profile.hackthebox.com/profile/01a037f5-5e12-71c7-b814-c91b11fb7662?utm_medium=copy_url" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb">🏅</div><div class="body"><h4>Powering Up</h4><p class="meta">Бейдж Hack The Box</p><a href="https://profile.hackthebox.com/profile/01a037f5-5e12-71c7-b814-c91b11fb7662?utm_medium=copy_url" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://profile.hackthebox.com/profile/01a037f5-5e12-71c7-b814-c91b11fb7662?utm_medium=copy_url" target="_blank" rel="noopener" aria-label="Our favorite seabird"><img src="https://static.hackthebox.com/academy/badges/our-favorite-seabird.png" alt="Бейдж Our favorite seabird" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>🏅</div><div class="body"><h4>Our favorite seabird</h4><p class="meta">Бейдж Hack The Box</p><a href="https://profile.hackthebox.com/profile/01a037f5-5e12-71c7-b814-c91b11fb7662?utm_medium=copy_url" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://profile.hackthebox.com/profile/01a037f5-5e12-71c7-b814-c91b11fb7662?utm_medium=copy_url" target="_blank" rel="noopener" aria-label="Constant Champion"><img src="https://static.hackthebox.com/academy/badges/8644292aaa052ff2971d3541256ee605/logo.png" alt="Бейдж Constant Champion" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>🏅</div><div class="body"><h4>Constant Champion</h4><p class="meta">Бейдж Hack The Box</p><a href="https://profile.hackthebox.com/profile/01a037f5-5e12-71c7-b814-c91b11fb7662?utm_medium=copy_url" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb">🏅</div><div class="body"><h4>Is There Anybody Out There?</h4><p class="meta">Бейдж Hack The Box</p><a href="https://profile.hackthebox.com/profile/01a037f5-5e12-71c7-b814-c91b11fb7662?utm_medium=copy_url" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb">🏅</div><div class="body"><h4>Script Kiddie</h4><p class="meta">Бейдж Hack The Box</p><a href="https://profile.hackthebox.com/profile/01a037f5-5e12-71c7-b814-c91b11fb7662?utm_medium=copy_url" target="_blank" rel="noopener">Переглянути →</a></div></article>
+    </div>
+  </section>
+
+  <section class="panel" id="machines">
+    <div class="panel-head ph-htb"><span class="tag">Hack The Box · 2.2</span><h2>Машини</h2><p>Пройдені (owned) машини в HTB Labs.</p><div class="count">💻 5 машин</div></div>
+    <div class="grid">
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://labs.hackthebox.com/achievement/machine/2238269/915" target="_blank" rel="noopener" aria-label="Досягнення Owned Enigma"><img src="https://labs.hackthebox.com/achievement/machine/preview/2238269/915.png" alt="Owned Enigma — Hack The Box" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>💻</div><div class="body"><h4>Enigma</h4><p class="meta">Owned<span class="pts">585 очок</span></p><a href="https://labs.hackthebox.com/achievement/machine/2238269/915" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://labs.hackthebox.com/achievement/machine/2238269/1012" target="_blank" rel="noopener" aria-label="Досягнення Owned Unclaimed"><img src="https://labs.hackthebox.com/achievement/machine/preview/2238269/1012.png" alt="Owned Unclaimed — Hack The Box" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>💻</div><div class="body"><h4>Unclaimed</h4><p class="meta">Owned<span class="pts">845 очок</span></p><a href="https://labs.hackthebox.com/achievement/machine/2238269/1012" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://labs.hackthebox.com/achievement/machine/2238269/999" target="_blank" rel="noopener" aria-label="Досягнення Owned DutyBound"><img src="https://labs.hackthebox.com/achievement/machine/preview/2238269/999.png" alt="Owned DutyBound — Hack The Box" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>💻</div><div class="body"><h4>DutyBound</h4><p class="meta">Owned<span class="pts">845 очок</span></p><a href="https://labs.hackthebox.com/achievement/machine/2238269/999" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://labs.hackthebox.com/achievement/machine/2238269/933" target="_blank" rel="noopener" aria-label="Досягнення Owned Cohort"><img src="https://labs.hackthebox.com/achievement/machine/preview/2238269/933.png" alt="Owned Cohort — Hack The Box" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>💻</div><div class="body"><h4>Cohort</h4><p class="meta">Owned<span class="pts">585 очок</span></p><a href="https://labs.hackthebox.com/achievement/machine/2238269/933" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://labs.hackthebox.com/achievement/machine/2238269/981" target="_blank" rel="noopener" aria-label="Досягнення Owned Management"><img src="https://labs.hackthebox.com/achievement/machine/preview/2238269/981.png" alt="Owned Management — Hack The Box" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>💻</div><div class="body"><h4>Management</h4><p class="meta">Owned<span class="pts">585 очок</span></p><a href="https://labs.hackthebox.com/achievement/machine/2238269/981" target="_blank" rel="noopener">Переглянути →</a></div></article>
+    </div>
+  </section>
+
+  <section class="panel" id="challenges">
+    <div class="panel-head ph-htb"><span class="tag">Hack The Box · 2.3</span><h2>Челенджі</h2><p>Розв’язані завдання в категоріях CTF.</p><div class="count">🚩 7 челенджів</div></div>
+    <div class="grid">
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://labs.hackthebox.com/achievement/challenge/2238269/1851" target="_blank" rel="noopener" aria-label="Досягнення Last Call"><img src="https://labs.hackthebox.com/achievement/challenge/preview/2238269/1851.png" alt="Owned challenge Last Call — Hack The Box" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>🚩</div><div class="body"><h4>Last Call</h4><p class="meta">Challenge · Owned</p><a href="https://labs.hackthebox.com/achievement/challenge/2238269/1851" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://labs.hackthebox.com/achievement/challenge/2238269/397" target="_blank" rel="noopener" aria-label="Досягнення NoMap3D"><img src="https://labs.hackthebox.com/achievement/challenge/preview/2238269/397.png" alt="Owned challenge NoMap3D — Hack The Box" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>🚩</div><div class="body"><h4>NoMap3D</h4><p class="meta">Challenge · Owned</p><a href="https://labs.hackthebox.com/achievement/challenge/2238269/397" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://labs.hackthebox.com/achievement/challenge/2238269/451" target="_blank" rel="noopener" aria-label="Досягнення Noisy"><img src="https://labs.hackthebox.com/achievement/challenge/preview/2238269/451.png" alt="Owned challenge Noisy — Hack The Box" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>🚩</div><div class="body"><h4>Noisy</h4><p class="meta">Challenge · Owned</p><a href="https://labs.hackthebox.com/achievement/challenge/2238269/451" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://labs.hackthebox.com/achievement/challenge/2238269/952" target="_blank" rel="noopener" aria-label="Досягнення Not Posixtive"><img src="https://labs.hackthebox.com/achievement/challenge/preview/2238269/952.png" alt="Owned challenge Not Posixtive — Hack The Box" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>🚩</div><div class="body"><h4>Not Posixtive</h4><p class="meta">Challenge · Owned</p><a href="https://labs.hackthebox.com/achievement/challenge/2238269/952" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://labs.hackthebox.com/achievement/challenge/2238269/1527" target="_blank" rel="noopener" aria-label="Досягнення Phosphor Ghost"><img src="https://labs.hackthebox.com/achievement/challenge/preview/2238269/1527.png" alt="Owned challenge Phosphor Ghost — Hack The Box" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>🚩</div><div class="body"><h4>Phosphor Ghost</h4><p class="meta">Challenge · Owned</p><a href="https://labs.hackthebox.com/achievement/challenge/2238269/1527" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://labs.hackthebox.com/achievement/challenge/2238269/1036" target="_blank" rel="noopener" aria-label="Досягнення SokobanHTB"><img src="https://labs.hackthebox.com/achievement/challenge/preview/2238269/1036.png" alt="Owned challenge SokobanHTB — Hack The Box" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>🚩</div><div class="body"><h4>SokobanHTB</h4><p class="meta">Challenge · Owned</p><a href="https://labs.hackthebox.com/achievement/challenge/2238269/1036" target="_blank" rel="noopener">Переглянути →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot fit" href="https://labs.hackthebox.com/achievement/challenge/2238269/837" target="_blank" rel="noopener" aria-label="Досягнення r0bob1rd"><img src="https://labs.hackthebox.com/achievement/challenge/preview/2238269/837.png" alt="Owned challenge r0bob1rd — Hack The Box" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></a>🚩</div><div class="body"><h4>r0bob1rd</h4><p class="meta">Challenge · Owned</p><a href="https://labs.hackthebox.com/achievement/challenge/2238269/837" target="_blank" rel="noopener">Переглянути →</a></div></article>
+    </div>
+  </section>
+
+  <section class="panel" id="thm">
+    <div class="panel-head ph-thm"><span class="tag">Кімнати</span><h2>TryHackMe</h2><p>Пройдені навчальні кімнати.</p><div class="count">🚩 2 кімнати</div></div>
+    <div class="grid">
+      <article class="card"><div class="thumb">🚩</div><div class="body"><h4>Назва кімнати 1</h4><p class="meta">Easy</p><a href="#" target="_blank" rel="noopener">Відкрити →</a></div></article>
+      <article class="card"><div class="thumb">🚩</div><div class="body"><h4>Назва кімнати 2</h4><p class="meta">Easy</p><a href="#" target="_blank" rel="noopener">Відкрити →</a></div></article>
+    </div>
+  </section>
+
+  <section class="panel" id="cisco">
+    <div class="panel-head ph-cisco"><span class="tag">Сертифікати · Skills for All</span><h2>Cisco Networking Academy</h2><p>Пройдені курси з мереж, кібербезпеки та ІТ.</p><div class="count">🎓 15 сертифікатів</div></div>
+    <p class="note">Усі 15 сертифікатів Cisco Networking Academy. Натисніть на сертифікат, щоб відкрити його у великому форматі.</p>
+    <div class="grid">
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/0283FrMK/Network-Defense-certificate-nastyamalovajna-gmail-com-868b3dd7-c75a-4f48-94a5-e933d8375d4b-%281%29.png" data-zoom aria-label="Збільшити сертифікат 1"><img src="https://i.postimg.cc/0283FrMK/Network-Defense-certificate-nastyamalovajna-gmail-com-868b3dd7-c75a-4f48-94a5-e933d8375d4b-%281%29.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Network Defense" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Network Defense</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/0283FrMK/Network-Defense-certificate-nastyamalovajna-gmail-com-868b3dd7-c75a-4f48-94a5-e933d8375d4b-%281%29.png" data-zoom>Збільшити →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/0283FrMg/Endpoint-Security-certificate-nastyamalovajna-gmail-com-614886c6-1b09-458b-9199-8d84c5034303-%281%29.png" data-zoom aria-label="Збільшити сертифікат 2"><img src="https://i.postimg.cc/0283FrMg/Endpoint-Security-certificate-nastyamalovajna-gmail-com-614886c6-1b09-458b-9199-8d84c5034303-%281%29.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Endpoint Security" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Endpoint Security</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/0283FrMg/Endpoint-Security-certificate-nastyamalovajna-gmail-com-614886c6-1b09-458b-9199-8d84c5034303-%281%29.png" data-zoom>Збільшити →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/XNKms9J7/Cyber-Threat-Management-certificate-nastyamalovajna-gmail-com-54ebafa7-46e6-4e28-9a0b-bbb49f4ba17a-%28.png" data-zoom aria-label="Збільшити сертифікат 3"><img src="https://i.postimg.cc/XNKms9J7/Cyber-Threat-Management-certificate-nastyamalovajna-gmail-com-54ebafa7-46e6-4e28-9a0b-bbb49f4ba17a-%28.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Cyber Threat Management" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Cyber Threat Management</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/XNKms9J7/Cyber-Threat-Management-certificate-nastyamalovajna-gmail-com-54ebafa7-46e6-4e28-9a0b-bbb49f4ba17a-%28.png" data-zoom>Збільшити →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/kXnZzD64/Introduction-to-Io-T-certificate-nastyamalovajna-gmail-com-2912dd57-c1e0-44d1-94d6-dfe91ef22bad-%281%29.png" data-zoom aria-label="Збільшити сертифікат 4"><img src="https://i.postimg.cc/kXnZzD64/Introduction-to-Io-T-certificate-nastyamalovajna-gmail-com-2912dd57-c1e0-44d1-94d6-dfe91ef22bad-%281%29.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Introduction to IoT" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Introduction to IoT</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/kXnZzD64/Introduction-to-Io-T-certificate-nastyamalovajna-gmail-com-2912dd57-c1e0-44d1-94d6-dfe91ef22bad-%281%29.png" data-zoom>Збільшити →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/8P139sJ6/Networking-Basics-certificate-nastyamalovajna-gmail-com-0a4d5916-4eeb-48ef-9c03-f66560cc1a93.png" data-zoom aria-label="Збільшити сертифікат 5"><img src="https://i.postimg.cc/8P139sJ6/Networking-Basics-certificate-nastyamalovajna-gmail-com-0a4d5916-4eeb-48ef-9c03-f66560cc1a93.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Networking Basics" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Networking Basics</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/8P139sJ6/Networking-Basics-certificate-nastyamalovajna-gmail-com-0a4d5916-4eeb-48ef-9c03-f66560cc1a93.png" data-zoom>Збільшити →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/gkY5QrwC/Exploring-Io-T-with-Cisco-Packet-Tracer-certificate-nastyamalovajna-gmail-com-72d4d994-2cae-422c-862.png" data-zoom aria-label="Збільшити сертифікат 6"><img src="https://i.postimg.cc/gkY5QrwC/Exploring-Io-T-with-Cisco-Packet-Tracer-certificate-nastyamalovajna-gmail-com-72d4d994-2cae-422c-862.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Exploring IoT with Cisco Packet Tracer" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Exploring IoT with Cisco Packet Tracer</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/gkY5QrwC/Exploring-Io-T-with-Cisco-Packet-Tracer-certificate-nastyamalovajna-gmail-com-72d4d994-2cae-422c-862.png" data-zoom>Збільшити →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/8P139sJP/Exploring-Networking-with-Cisco-Packet-Tracer-certificate-nastyamalovajna-gmail-com-c5e53e8c-152b-40.png" data-zoom aria-label="Збільшити сертифікат 7"><img src="https://i.postimg.cc/8P139sJP/Exploring-Networking-with-Cisco-Packet-Tracer-certificate-nastyamalovajna-gmail-com-c5e53e8c-152b-40.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Exploring Networking with Cisco Packet Tracer" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Exploring Networking with Cisco Packet Tracer</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/8P139sJP/Exploring-Networking-with-Cisco-Packet-Tracer-certificate-nastyamalovajna-gmail-com-c5e53e8c-152b-40.png" data-zoom>Збільшити →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/yYV5tWgJ/Network-Addressing-and-Basic-Troubleshooting-certificate-nastyamalovajna-gmail-com-9c8baa87-5330-4ed.png" data-zoom aria-label="Збільшити сертифікат 8"><img src="https://i.postimg.cc/yYV5tWgJ/Network-Addressing-and-Basic-Troubleshooting-certificate-nastyamalovajna-gmail-com-9c8baa87-5330-4ed.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Network Addressing and Basic Troubleshooting" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Network Addressing and Basic Troubleshooting</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/yYV5tWgJ/Network-Addressing-and-Basic-Troubleshooting-certificate-nastyamalovajna-gmail-com-9c8baa87-5330-4ed.png" data-zoom>Збільшити →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/tRdwBFg5/Computer-Hardware-Basics-certificate-nastyamalovajna-gmail-com-6619ae0c-002c-4f90-ae2f-ab2535dcd4f4.png" data-zoom aria-label="Збільшити сертифікат 9"><img src="https://i.postimg.cc/tRdwBFg5/Computer-Hardware-Basics-certificate-nastyamalovajna-gmail-com-6619ae0c-002c-4f90-ae2f-ab2535dcd4f4.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Computer Hardware Basics" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Computer Hardware Basics</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/tRdwBFg5/Computer-Hardware-Basics-certificate-nastyamalovajna-gmail-com-6619ae0c-002c-4f90-ae2f-ab2535dcd4f4.png" data-zoom>Збільшити →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/wT6PZ3ys/Network-Support-and-Security-certificate-nastyamalovajna-gmail-com-75f58c94-8d29-4e7a-ae54-741f7713e.png" data-zoom aria-label="Збільшити сертифікат 10"><img src="https://i.postimg.cc/wT6PZ3ys/Network-Support-and-Security-certificate-nastyamalovajna-gmail-com-75f58c94-8d29-4e7a-ae54-741f7713e.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Network Support and Security" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Network Support and Security</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/wT6PZ3ys/Network-Support-and-Security-certificate-nastyamalovajna-gmail-com-75f58c94-8d29-4e7a-ae54-741f7713e.png" data-zoom>Збільшити →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/sDV8q1QP/Networking-Devices-and-Initial-Configuration-certificate-nastyamalovajna-gmail-com-ba13a19f-8e2d-416.png" data-zoom aria-label="Збільшити сертифікат 11"><img src="https://i.postimg.cc/sDV8q1QP/Networking-Devices-and-Initial-Configuration-certificate-nastyamalovajna-gmail-com-ba13a19f-8e2d-416.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Networking Devices and Initial Configuration" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Networking Devices and Initial Configuration</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/sDV8q1QP/Networking-Devices-and-Initial-Configuration-certificate-nastyamalovajna-gmail-com-ba13a19f-8e2d-416.png" data-zoom>Збільшити →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/ZKVgSZpy/Operating-Systems-Basics-certificate-nastyamalovajna-gmail-com-2037170a-ead5-4e7f-95fa-04884a7dd71a.png" data-zoom aria-label="Збільшити сертифікат 12"><img src="https://i.postimg.cc/ZKVgSZpy/Operating-Systems-Basics-certificate-nastyamalovajna-gmail-com-2037170a-ead5-4e7f-95fa-04884a7dd71a.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Operating Systems Basics" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Operating Systems Basics</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/ZKVgSZpy/Operating-Systems-Basics-certificate-nastyamalovajna-gmail-com-2037170a-ead5-4e7f-95fa-04884a7dd71a.png" data-zoom>Збільшити →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/m2bqJhzr/Introduction-to-Cybersecurity-certificate-nastyamalovajna-gmail-com-b8111ac9-92ae-4a00-8753-09209090.png" data-zoom aria-label="Збільшити сертифікат 13"><img src="https://i.postimg.cc/m2bqJhzr/Introduction-to-Cybersecurity-certificate-nastyamalovajna-gmail-com-b8111ac9-92ae-4a00-8753-09209090.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Introduction to Cybersecurity" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Introduction to Cybersecurity</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/m2bqJhzr/Introduction-to-Cybersecurity-certificate-nastyamalovajna-gmail-com-b8111ac9-92ae-4a00-8753-09209090.png" data-zoom>Збільшити →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/rF8b3z0w/Getting-Started-with-Cisco-Packet-Tracer-certificate-nastyamalovajna-gmail-com-6ce42255-82c7-4115-92.png" data-zoom aria-label="Збільшити сертифікат 14"><img src="https://i.postimg.cc/rF8b3z0w/Getting-Started-with-Cisco-Packet-Tracer-certificate-nastyamalovajna-gmail-com-6ce42255-82c7-4115-92.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Getting Started with Cisco Packet Tracer" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Getting Started with Cisco Packet Tracer</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/rF8b3z0w/Getting-Started-with-Cisco-Packet-Tracer-certificate-nastyamalovajna-gmail-com-6ce42255-82c7-4115-92.png" data-zoom>Збільшити →</a></div></article>
+      <article class="card"><div class="thumb"><a class="shot" href="https://i.postimg.cc/7P1dKS6P/Ethical-Hacker-certificate-nastyamalovajna-gmail-com-3421fd1e-2e5d-440d-963e-edfd26f7b9f1.png" data-zoom aria-label="Збільшити сертифікат 15"><img src="https://i.postimg.cc/7P1dKS6P/Ethical-Hacker-certificate-nastyamalovajna-gmail-com-3421fd1e-2e5d-440d-963e-edfd26f7b9f1.png" referrerpolicy="no-referrer" alt="Сертифікат Cisco: Ethical Hacker" loading="lazy" onerror="this.remove()"></a>📜</div><div class="body"><h4>Ethical Hacker</h4><p class="meta">Cisco Networking Academy</p><a href="https://i.postimg.cc/7P1dKS6P/Ethical-Hacker-certificate-nastyamalovajna-gmail-com-3421fd1e-2e5d-440d-963e-edfd26f7b9f1.png" data-zoom>Збільшити →</a></div></article>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var tabs=document.querySelectorAll('.tab'),panels=document.querySelectorAll('.panel');
+  function show(id){
+    if(!document.getElementById(id))return;
+    tabs.forEach(function(t){t.classList.toggle('active',t.dataset.target===id)});
+    panels.forEach(function(p){p.classList.toggle('active',p.id===id)});
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.target)})});
+  document.querySelectorAll('[data-goto]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.goto)})});
+})();
+</script>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Перегляд сертифіката"><button type="button" aria-label="Закрити">×</button><img alt=""></div>
+<script>
+(function(){
+  var lb=document.getElementById('lb'),im=lb.querySelector('img');
+  function open(src,alt){im.src=src;im.alt=alt||'';lb.classList.add('open');document.body.classList.add('lb-lock');}
+  function close(){lb.classList.remove('open');document.body.classList.remove('lb-lock');im.removeAttribute('src');}
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[data-zoom]');
+    if(a){e.preventDefault();var i=a.closest('.card').querySelector('img');open(a.getAttribute('href'),i?i.alt:'');return;}
+    if(e.target.closest('#lb')&&e.target.tagName!=='IMG')close();
+    else if(e.target===im)close();
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+</script>
+</body>
+</html>
